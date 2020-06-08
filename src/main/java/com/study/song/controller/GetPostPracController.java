@@ -31,6 +31,6 @@ public class GetPostPracController {
         dto.setId(0);
         dto.setName(name);
         dto.setNums(nums);
-        return dto;
+        return dto;     
     }
 }
