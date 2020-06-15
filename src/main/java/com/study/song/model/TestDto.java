@@ -1,4 +1,4 @@
-package com.study.song.dto;
+package com.study.song.model;
 
 import lombok.Data;
 
