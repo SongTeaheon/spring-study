@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class OxmServiceImpl implements OxmService{
 
-    @Autowired
     BoardMapper boardMapper;
+
+    @Autowired
+    public OxmServiceImpl(BoardMapper boardMapper) {
+        this.boardMapper = boardMapper;
+    }
 
     @Override
     public BoardDTO getBoardDTO(int id) {
@@ -20,21 +24,21 @@ public class OxmServiceImpl implements OxmService{
 
     @Override
     public List<BoardDTO> getListBoardDTO() {
-        return null;
+        return boardMapper.selListBoardDTO();
     }
 
     @Override
     public void removeBoardDTO(int id) {
-
+        boardMapper.delBoardDTO(id);
     }
 
     @Override
     public void addBoardDTO(BoardDTO board) {
-
+        boardMapper.insBoardDTO(board);
     }
 
     @Override
-    public void modifyBoardDTO(int id, BoardDTO board) {
-
+    public void modifyBoardDTO(BoardDTO board) {
+        boardMapper.modBoardDTO(board);
     }
 }

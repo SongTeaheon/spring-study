@@ -9,6 +9,6 @@ public interface OxmService {
     List<BoardDTO> getListBoardDTO();
     void removeBoardDTO(int id);
     void addBoardDTO(BoardDTO board);
-    void modifyBoardDTO(int id, BoardDTO board);
+    void modifyBoardDTO(BoardDTO board);
 
 }

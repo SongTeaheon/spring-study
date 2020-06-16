@@ -20,6 +20,24 @@
              , REGDATE
              , CONTENT
              , WRITER
-        FROM BOARD
+          FROM BOARD
     </select>
+
+    <insert id="insBoardDTO">
+        INSERT INTO BOARD (TITLE, CONTENT, WRITER)
+        VALUES (#{title},#{content},#{writer})
+    </insert>
+
+    <update id="modBoardDTO" parameterType="com.study.song.model.BoardDTO">
+        UPDATE BOARD
+        SET TITLE = #{title}
+          , CONTENT = #{content}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delBoardDTO">
+        DELETE FROM BOARD
+        WHERE ID = #{id}
+    </delete>
+
 </mapper>
