@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GetPostPracController {
 
-    //Get방식 배열넘기는 방법
+    //Get방식 배열넘기는 방법d
     //http://localhost:8090/getArr?nums=1&nums=2 또는
     //http://localhost:8090/getArr?nums=1,2,3
     @GetMapping("/getArr")
