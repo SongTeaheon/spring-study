@@ -12,7 +12,7 @@ public interface BoardMapper {
 
     BoardDTO selBoardDTOById(int id);
     List<BoardDTO> selListBoardDTO();
-    void modBoardDTO(BoardDTO boardDTO);
-    void delBoardDTO(int id);
-    void insBoardDTO(BoardDTO boardDTO);
+    int modBoardDTO(BoardDTO boardDTO);
+    int delBoardDTO(int id);
+    int insBoardDTO(BoardDTO boardDTO);
 }

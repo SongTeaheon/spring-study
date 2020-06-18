@@ -4,6 +4,7 @@ import com.study.song.Service.OxmService;
 import com.study.song.model.BoardDTO;
 import com.study.song.model.MyResponse;
 import com.study.song.repository.BoardMapper;
+import com.study.song.utils.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +45,16 @@ public class OxmController {
 
     @PostMapping(value = "/board/new")
     public MyResponse<?> insBoard(@RequestBody BoardDTO boardDTO) {
-        oxmService.addBoardDTO(boardDTO);
+        try{
+            oxmService.addBoardDTO(boardDTO);
+        }catch(MyException e) {
+            return MyResponse.builder()
+                    .code("500")
+                    .msg(e.getMessage())
+                    .object(null)
+                    .build();
+
+        }
         return MyResponse
                 .builder()
                 .code("200")
@@ -55,8 +65,16 @@ public class OxmController {
 
     @PutMapping("/board")
     public MyResponse<?> modBoard(@RequestBody BoardDTO boardDTO) {
-        log.info(boardDTO.toString());
-        oxmService.modifyBoardDTO(boardDTO);
+        try{
+            oxmService.modifyBoardDTO(boardDTO);
+        }catch(MyException e) {
+            return MyResponse.builder()
+                    .code("500")
+                    .msg(e.getMessage())
+                    .object(null)
+                    .build();
+        }
+
         return MyResponse
                 .builder()
                 .code("200")
@@ -67,7 +85,17 @@ public class OxmController {
 
     @DeleteMapping("/board/{id}")
     public MyResponse<?> removeBoard(@PathVariable int id) {
-        oxmService.removeBoardDTO(id);
+        try{
+            oxmService.removeBoardDTO(id);
+        }catch(MyException e) {
+            return MyResponse.builder()
+                    .code("500")
+                    .msg(e.getMessage())
+                    .object(null)
+                    .build();
+
+        }
+
         return MyResponse
                 .builder()
                 .code("200")
