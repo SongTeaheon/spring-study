@@ -20,7 +20,7 @@ public class GetPostPracController {
         return dto;
     }
 
-    //Post방식 배열넘기는 방법
+    //Post방식 배열넘기는 방법ㅇ
     //chrome-extension에서 테스트할 때, json을 text형식으로 보내면, 못 받음. Form형식으로 만들어서 보내야함.
     @PostMapping("/getArr")
     public TestDto getArrDataPost(String[] nums, String name) {
