@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #tbContent {
+            position: absolute;
+            width:200px;
+            top:30px;
+            left:50px;
+        }
+        .content{
+            width:180px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="add">
+    추가:<input id="addIpt" type="text" title="abc">
+    <input id="addBtn" type="button" value="추가">
+</div>
+
+<table id="tbContent">
+    <tr>
+        <td class="content">1</td>
+        <td><input class="delBtn" type="button" value="삭제"></td>
+    </tr>
+    <tr>
+        <td class="content">2</td>
+        <td><input class="delBtn" type="button" value="삭제"></td>
+    </tr>
+
+    <script>
+
+        $("#addBtn").click(function() {
+            console.log($("#srchIpt").val());
+            $("#tbContent").append('<tr><td class="content">'+$("#addIpt").val()+'</td><td><input class="delBtn" type="button" value="삭제"></td></tr>');
+        });
+
+        $(document).on("click", ".delBtn", function() {
+            $(this).parent().parent().remove();
+        });
+        $(document).on("click", ".content", function() {
+            if($(this).attr('isDel') === '1') {
+                $(this).css('text-decoration', '');
+                $(this).attr('isDel', '0');
+            }else{
+                $(this).css('text-decoration', 'line-through');
+                $(this).attr('isDel', '1');
+            }
+        });
+
+    </script>
+</table>
+</body>
+</html>
