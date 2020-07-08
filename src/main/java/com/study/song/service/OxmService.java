@@ -1,4 +1,4 @@
-package com.study.song.Service;
+package com.study.song.service;
 
 import com.study.song.model.BoardDTO;
 import com.study.song.utils.MyException;

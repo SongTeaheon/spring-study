@@ -1,9 +1,8 @@
 package com.study.song.controller;
 
-import com.study.song.Service.OxmService;
+import com.study.song.service.OxmService;
 import com.study.song.model.BoardDTO;
 import com.study.song.model.MyResponse;
-import com.study.song.repository.BoardMapper;
 import com.study.song.utils.MyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
