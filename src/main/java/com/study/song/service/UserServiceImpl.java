@@ -15,31 +15,34 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
-    PasswordEncoder passwordEncoder;
 
     //@Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getUserByName(username);
-        UserDetails userDetails = new UserDetails() {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.getUserByEmail(email);
+        return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 List<GrantedAuthority> authorityList = new ArrayList<>();
-                authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+                // Extract list of permissions (name)
+                user.getPermissionList().forEach(p -> {
+                    GrantedAuthority authority = new SimpleGrantedAuthority(p);
+                    authorityList.add(authority);
+                });
+
+                // Extract list of roles (ROLE_name)
+                user.getRoleList().forEach(p -> {
+                    GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + p);
+                    authorityList.add(authority);
+                });
+
                 return authorityList;
             }
 
@@ -73,7 +76,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 return true;
             }
         };
-
-        return userDetails;
     }
 }
