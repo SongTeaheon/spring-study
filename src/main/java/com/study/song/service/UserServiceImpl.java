@@ -2,6 +2,9 @@ package com.study.song.service;
 
 import com.study.song.model.User;
 import com.study.song.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +18,24 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
-    //@Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder ){
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository =userRepository;
+
+    }
+
+    @Override
+    public User save(User user) {
+        log.info(user.toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info(user.toString());
+        return userRepository.save(user);
     }
 
     @Override

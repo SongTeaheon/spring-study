@@ -4,10 +4,7 @@ import com.study.song.model.User;
 import com.study.song.repository.UserRepository;
 import com.study.song.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +18,7 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("test1")
     public String test1(){
@@ -35,6 +33,17 @@ public class UserController {
     @GetMapping("/all")
     public List<User> allUsers(){
         return this.userRepository.findAll();
+    }
+
+    @GetMapping("/new")
+    public User createHardcodingUser(){
+        User user = new User("song@naver.com", "1234", "", "");
+        return userService.save(user);
+    }
+
+    @PostMapping("/new")
+    public User createUser(User user){
+        return userService.save(user);
     }
 
 }
